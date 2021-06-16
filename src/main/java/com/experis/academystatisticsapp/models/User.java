@@ -4,7 +4,7 @@ import lombok.Data; // Lombok, tool for auto generation of getters and setters b
 
 @Data
 public class User {
-    private long id;
+    private Long id;
     private String email;
     private String password;
     private boolean isAdmin = false;

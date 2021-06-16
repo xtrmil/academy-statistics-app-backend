@@ -1,18 +1,18 @@
 package com.experis.academystatisticsapp.models;
 
-import com.experis.academystatisticsapp.models.enums.AppliedLanguage;
 import lombok.Data;
 
 import java.util.Map;
+import java.util.Set;
 
 @Data
 public class Applicant {
     private long id;
     private Education education;
-    private EducationLocation educationLocation;
+    private Location location;
     private int studiedSemesters;
     private boolean movable;
-    private AppliedLanguage appliedLanguage;
+    private Set<ProgrammingLanguage> programmingLanguages;
 
     private int clsScore;
     private int relativeClsScore;

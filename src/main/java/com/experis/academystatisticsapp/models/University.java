@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class Education {
-    private Long Id;
+public class University {
+    private Long id;
     private String name;
     private Set<Location> locations;
 }

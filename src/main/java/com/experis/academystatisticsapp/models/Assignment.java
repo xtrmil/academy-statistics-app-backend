@@ -1,12 +1,9 @@
 package com.experis.academystatisticsapp.models;
 
-import lombok.Data;
-
 import java.util.Set;
 
-@Data
-public class Education {
-    private Long Id;
-    private String name;
+public class Assignment {
+    private Long id;
+    private String companyName;
     private Set<Location> locations;
 }
