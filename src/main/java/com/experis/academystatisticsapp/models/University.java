@@ -8,5 +8,6 @@ import java.util.Set;
 public class University {
     private Long id;
     private String name;
+    //Change from set to mapping one to many
     private Set<Location> locations;
 }
