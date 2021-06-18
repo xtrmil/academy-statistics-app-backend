@@ -1,9 +1,20 @@
 package com.experis.academystatisticsapp.models;
 
-import java.util.Set;
-//Remove set 
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
 public class Assignment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String companyName;
-    private Set<Location> locations;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 }
