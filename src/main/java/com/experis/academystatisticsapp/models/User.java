@@ -18,5 +18,5 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private boolean isAdmin = false;
+    private Boolean isAdmin = false;
 }
