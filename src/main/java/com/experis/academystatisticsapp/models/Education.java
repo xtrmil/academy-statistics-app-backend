@@ -3,6 +3,7 @@ package com.experis.academystatisticsapp.models;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,8 +16,7 @@ public class Education {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "education_location", joinColumns = {@JoinColumn(name = "education_id")},
-            inverseJoinColumns = {@JoinColumn(name = "location_id")})
-    private List<Location> locations;
+    @ManyToMany(mappedBy = "educations")
+    private Set<Location> locations;
+
 }

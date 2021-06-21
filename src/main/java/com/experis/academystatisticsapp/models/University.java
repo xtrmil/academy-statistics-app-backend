@@ -3,7 +3,7 @@ package com.experis.academystatisticsapp.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,7 +15,6 @@ public class University {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinColumn(name = "id")
-    private List<Location> locations;
+    @ManyToMany(mappedBy = "universities")
+    private Set<Location> locations;
 }
