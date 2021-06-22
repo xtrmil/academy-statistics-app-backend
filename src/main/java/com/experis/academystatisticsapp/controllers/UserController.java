@@ -23,4 +23,9 @@ public class UserController {
     public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId){
         return null;
     }
+
+    @GetMapping("{userId}")
+    public ResponseEntity<CommonResponse> getUserById(@PathVariable Long userId){
+        return userService.getUser(userId);
+    }
 }
