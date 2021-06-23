@@ -48,6 +48,15 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
+    public ResponseEntity<CommonResponse> GetAllUsers(){
+        CommonResponse cr = new CommonResponse();
+        cr.data = userRepository.GetAll();
+        cr.status = HttpStatus.OK;
+        cr.msg = "List of all users";
+
+        return new ResponseEntity<>(cr, cr.status);
+    }
+
     public ResponseEntity<CommonResponse> updateUserIsAdmin(Long id){
         CommonResponse cr = new CommonResponse();
 
@@ -61,6 +70,27 @@ public class UserService {
         }
         else{
             cr.msg = "User with id: " + id + " was not found.";
+            cr.status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<>(cr, cr.status);
+    }
+
+    public ResponseEntity<CommonResponse> updateUserPassword(Long id, String password){
+        CommonResponse cr = new CommonResponse();
+
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
+
+        if(optionalUser.isPresent()) {
+
+            optionalUser.get().setPassword(password);
+            System.out.println(password);
+            userRepository.updatePasswordByUserId(id, optionalUser.get().getPassword());
+            cr.data = optionalUser;
+            cr.msg = "Password was updated successfully.";
+            cr.status = HttpStatus.OK;
+        }
+        else {
+            cr.msg = "Unable to update password for user with email: " + optionalUser.get().getEmail();
             cr.status = HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<>(cr, cr.status);
@@ -116,12 +146,5 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    public ResponseEntity<CommonResponse> GetAllUsers(){
-        CommonResponse cr = new CommonResponse();
-        cr.data = userRepository.GetAll();
-        cr.status = HttpStatus.OK;
-        cr.msg = "List of all users";
 
-        return new ResponseEntity<>(cr, cr.status);
-    }
 }

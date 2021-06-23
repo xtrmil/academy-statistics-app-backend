@@ -24,6 +24,11 @@ public class UserController {
         return userService.getUser(userId);
     }
 
+    @GetMapping("all")
+    public ResponseEntity<CommonResponse> getAllUsers(){
+        return userService.GetAllUsers();
+    }
+
     @PutMapping("admin/{userId}")
     public ResponseEntity<CommonResponse> updateUserIsAdmin(@PathVariable Long userId) {
         return userService.updateUserIsAdmin(userId);
@@ -34,22 +39,20 @@ public class UserController {
         return userService.updateUser(userId, userToUpdate);
     }
 
+    @PutMapping("update/{userId}")
+    public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId, @RequestBody String password) {
+        return userService.updateUserPassword(userId, password);
+    }
+
     @DeleteMapping("{userId}")
     public ResponseEntity<CommonResponse> deleteUser(@PathVariable Long userId){
         return userService.deleteUser(userId);
     }
 
-    @GetMapping("all")
-    public ResponseEntity<CommonResponse> getAllUsers(){
-        return userService.GetAllUsers();
-    }
 
-    /*
-    @PutMapping("{userId}")
-    public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId) {
-        return null;
-    }
-     */
+
+
+
 
 }
 
