@@ -15,8 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO User (email,password,is_admin) VALUES (?1,?2,?3)", nativeQuery = true)
-    void createUser(String email, String password, byte isAdmin);
+    @Query(value = "INSERT INTO User (email,first_name, last_name, password,is_admin) VALUES (?1,?2,?3, ?4, ?5)", nativeQuery = true)
+    void createUser(String email, String firstName, String lastName, String password, byte isAdmin);
 
     @Query(value = "SELECT * FROM User user WHERE user.id = ?1", nativeQuery = true)
     User getUserById(Long id);
@@ -31,8 +31,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE User SET email = ?1, is_admin = ?2 WHERE User.id = ?3", nativeQuery = true)
-    User updateUserById();
+    @Query(value = "UPDATE User SET email = ?2, first_name = ?3, last_name = ?4 " +
+            "WHERE User.id = ?1", nativeQuery = true)
+    void updateUserById(Long id, String email, String firstName, String lastName);
 
     @Query(value = "DELETE FROM User WHERE User.id = ?1", nativeQuery = true)
     User deleteUserById();

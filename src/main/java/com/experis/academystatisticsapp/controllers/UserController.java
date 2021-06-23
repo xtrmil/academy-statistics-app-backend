@@ -24,17 +24,15 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-    @PutMapping("{userId}")
+    @PutMapping("admin/{userId}")
     public ResponseEntity<CommonResponse> updateUserIsAdmin(@PathVariable Long userId) {
         return userService.updateUserIsAdmin(userId);
     }
 
-    /*
     @PutMapping("{userId}")
-    public ResponseEntity<CommonResponse> updateUser(@PathVariable User user) {
-        return null;
+    public ResponseEntity<CommonResponse> updateUser(@PathVariable Long userId, @RequestBody User userToUpdate) {
+        return userService.updateUser(userId, userToUpdate);
     }
-     */
 
     @DeleteMapping("{userId}")
     public ResponseEntity<CommonResponse> deleteUser(@PathVariable Long userId){

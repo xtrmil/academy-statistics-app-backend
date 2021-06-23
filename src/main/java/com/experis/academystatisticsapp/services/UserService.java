@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class UserService {
         CommonResponse cr = new CommonResponse();
 
         if(!userRepository.existsByEmail(user.getEmail())){
-            userRepository.createUser(user.getEmail(),user.getPassword(),(byte)(user.getIsAdmin()?1:0));
+            userRepository.createUser(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword(),(byte)(user.getIsAdmin()?1:0));
             cr.msg = "User with email: " + user.getEmail() + " was created successfully.";
             cr.status = HttpStatus.CREATED;
         }
@@ -60,6 +61,37 @@ public class UserService {
         }
         else{
             cr.msg = "User with id: " + id + " was not found.";
+            cr.status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<>(cr, cr.status);
+    }
+
+    public ResponseEntity<CommonResponse> updateUser(Long id, User userToUpdate){
+        CommonResponse cr = new CommonResponse();
+
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
+
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+
+            if(userToUpdate.getFirstName() != null){
+                user.setFirstName(userToUpdate.getFirstName());
+            }
+
+            if(userToUpdate.getLastName() != null){
+                user.setLastName(userToUpdate.getLastName());
+            }
+
+            if(userToUpdate.getEmail() != null){
+                user.setEmail(userToUpdate.getEmail());
+            }
+            userRepository.updateUserById(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName());
+            cr.data = user;
+            cr.msg = "User: " + user.getFirstName() + " " + user.getLastName() + " was updated.";
+            cr.status = HttpStatus.OK;
+        }
+        else {
+            cr.msg = "Unable to update user with email : " + userToUpdate.getEmail();
             cr.status = HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<>(cr, cr.status);
