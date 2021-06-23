@@ -35,8 +35,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE User.id = ?1", nativeQuery = true)
     void updateUserById(Long id, String email, String firstName, String lastName);
 
+    @Transactional
+    @Modifying
     @Query(value = "DELETE FROM User WHERE User.id = ?1", nativeQuery = true)
-    User deleteUserById();
+    void deleteUserById(Long id);
 
     @Query(value = "SELECT * FROM User", nativeQuery = true)
     List<User> GetAll();

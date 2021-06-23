@@ -97,7 +97,24 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    //public ResponseEntity<CommonResponse> deleteUser(Long id){}
+    public ResponseEntity<CommonResponse> deleteUser(Long id){
+        CommonResponse cr = new CommonResponse();
+
+        Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
+
+        if(optionalUser.isPresent()){
+            userRepository.deleteUserById(id);
+            cr.data = optionalUser;
+            cr.msg = "User with email: " + optionalUser.get().getEmail() + " was deleted successfully.";
+            cr.status = HttpStatus.OK;
+        }
+        else {
+            cr.data = optionalUser;
+            cr.msg = "Unable to delete user with email: " + optionalUser.get().getEmail();
+            cr.status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<>(cr, cr.status);
+    }
 
     public ResponseEntity<CommonResponse> GetAllUsers(){
         CommonResponse cr = new CommonResponse();
