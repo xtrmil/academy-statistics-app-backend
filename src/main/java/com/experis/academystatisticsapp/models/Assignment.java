@@ -3,6 +3,7 @@ package com.experis.academystatisticsapp.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,6 +14,9 @@ public class Assignment {
 
     @Column
     private String companyName;
+
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Applicant> applicants;
 
     @ManyToOne
     @JoinColumn(name = "location_id")

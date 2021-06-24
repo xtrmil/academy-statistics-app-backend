@@ -3,6 +3,7 @@ package com.experis.academystatisticsapp.controllers;
 import com.experis.academystatisticsapp.models.User;
 import com.experis.academystatisticsapp.services.CommonResponse;
 import com.experis.academystatisticsapp.services.UserService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,8 @@ public class UserController {
     }
 
     @PutMapping("update/{userId}")
-    public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId, @RequestBody String password) {
-        return userService.updateUserPassword(userId, password);
+    public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId, @RequestBody ObjectNode password) {
+        return userService.updateUserPassword(userId, password.get("password").asText());
     }
 
     @DeleteMapping("{userId}")

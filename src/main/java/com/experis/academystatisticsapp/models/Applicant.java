@@ -42,6 +42,10 @@ public class Applicant {
     @Column
     private Integer relativeSwitchScore;
 
+    @ManyToOne
+    @JoinColumn(name = "assignment_id")
+    private Assignment assignment;
+
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PersonalityTestScore> personalityTestScores;
 
