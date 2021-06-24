@@ -83,7 +83,6 @@ public class UserService {
         if(optionalUser.isPresent()) {
 
             optionalUser.get().setPassword(password);
-            System.out.println(password);
             userRepository.updatePasswordByUserId(id, optionalUser.get().getPassword());
             cr.data = optionalUser;
             cr.msg = "Password was updated successfully.";
