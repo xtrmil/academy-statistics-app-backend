@@ -40,7 +40,8 @@ public class UserController {
         return userService.updateUser(userId, userToUpdate);
     }
 
-    @PutMapping("update/{userId}")
+    @PutMapping("password/{userId}")
+
     public ResponseEntity<CommonResponse> updateUserPassword(@PathVariable Long userId, @RequestBody ObjectNode password) {
         return userService.updateUserPassword(userId, password.get("password").asText());
     }
