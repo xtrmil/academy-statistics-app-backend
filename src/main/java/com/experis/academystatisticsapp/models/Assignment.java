@@ -15,7 +15,7 @@ public class Assignment {
     @Column
     private String companyName;
 
-    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignment")
     private List<Applicant> applicants;
 
     @ManyToOne
