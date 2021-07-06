@@ -14,7 +14,7 @@ public class DevLanguage {
    private Long id;
 
    @Column(nullable = false)
-   private String language;
+   private String name;
 
    @ManyToMany(mappedBy = "devLanguages")
    private Set<Applicant> applicants;
