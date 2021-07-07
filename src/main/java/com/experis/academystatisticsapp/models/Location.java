@@ -2,7 +2,6 @@ package com.experis.academystatisticsapp.models;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -26,7 +25,8 @@ public class Location {
             inverseJoinColumns = {@JoinColumn(name = "location_id")})
     private Set<University> universities;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Assignment> assignments;
+
+    @OneToMany(mappedBy = "location")
+    private Set<Assignment> assignments;
 }
 

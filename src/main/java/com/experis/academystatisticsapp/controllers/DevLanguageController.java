@@ -15,12 +15,12 @@ public class DevLanguageController {
     DevLanguageService devLanguageService;
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> createDevLanguage(@RequestBody DevLanguage devLanguage){
-        return devLanguageService.addDevLanguage(devLanguage);
+    public ResponseEntity<CommonResponse> addDevLanguage(@RequestBody DevLanguage devLanguage){
+        return devLanguageService.createDevLanguage(devLanguage);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CommonResponse> getUser(@PathVariable Long id) {
+    public ResponseEntity<CommonResponse> getDevLanguage(@PathVariable Long id) {
         return devLanguageService.getDevLanguageById(id);
     }
 

@@ -3,7 +3,6 @@ package com.experis.academystatisticsapp.models;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data; // Lombok, tool for auto generation of getters and setters by using @Data in model class
-
 import javax.persistence.*;
 
 @Data

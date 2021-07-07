@@ -50,11 +50,5 @@ public class UserController {
     public ResponseEntity<CommonResponse> deleteUser(@PathVariable Long userId){
         return userService.deleteUser(userId);
     }
-
-
-
-
-
-
 }
 

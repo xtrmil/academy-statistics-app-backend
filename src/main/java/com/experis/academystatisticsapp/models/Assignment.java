@@ -1,7 +1,6 @@
 package com.experis.academystatisticsapp.models;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +12,9 @@ public class Assignment {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String companyName;
 
     @OneToMany(mappedBy = "assignment")
@@ -21,4 +23,5 @@ public class Assignment {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
 }
