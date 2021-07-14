@@ -20,7 +20,15 @@ public class ApplicantService {
         CommonResponse cr = new CommonResponse();
 
         if(!applicantRepository.existsById(applicant.getId())){
-            //applicantRepository.createApplicant();
+            applicantRepository.createApplicant(applicant.getClsScore(),
+                    applicant.getInterviewScore(),
+                    applicant.isMovable(),
+                    applicant.getRelativeClsScore(),
+                    applicant.getRelativeSwitchScore(),
+                    applicant.getStudiedSemesters(),
+                    applicant.getSwitchScore(),
+                    applicant.getAssignment().getId());
+
             cr.msg = "Applicant: " + applicant.getId() + " was added successfully.";
             cr.status = HttpStatus.CREATED;
         }

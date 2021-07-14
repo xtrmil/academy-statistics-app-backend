@@ -29,7 +29,7 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
                          boolean movable,
                          Integer relativeClsScore,
                          Integer relativeSwitchScore,
-                         Integer studiesSemester,
+                         Integer studiedSemester,
                          Integer switchScore,
                          Long assignmentId);
 
