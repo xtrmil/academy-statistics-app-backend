@@ -26,8 +26,7 @@ public class ApplicantService {
                     applicant.getRelativeClsScore(),
                     applicant.getRelativeSwitchScore(),
                     applicant.getStudiedSemesters(),
-                    applicant.getSwitchScore(),
-                    applicant.getAssignment().getId());
+                    applicant.getSwitchScore());
 
             cr.msg = "Applicant: " + applicant.getId() + " was added successfully.";
             cr.status = HttpStatus.CREATED;

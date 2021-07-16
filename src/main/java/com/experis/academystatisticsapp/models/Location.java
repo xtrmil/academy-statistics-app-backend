@@ -26,7 +26,7 @@ public class Location {
     private Set<University> universities;
 
 
-    @OneToMany(mappedBy = "location")
-    private Set<Assignment> assignments;
+//    @OneToMany(mappedBy = "location")
+//    private Set<Assignment> assignments;
 }
 
