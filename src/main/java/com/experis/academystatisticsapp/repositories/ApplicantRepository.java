@@ -37,7 +37,7 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
     @Query(value = "SELECT IF(EXISTS (SELECT * FROM Applicant WHERE applicant.id =?1), 'true','false')", nativeQuery = true)
     boolean existsById(Long id);
 
-    /**TODO*/
+
     @Transactional
     @Modifying
     @Query(value = "REPLACE INTO Applicant " +

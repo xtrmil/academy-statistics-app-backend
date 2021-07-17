@@ -14,8 +14,20 @@ public class PersonalityTestScoreService {
 
     @Autowired
     PersonalityTestScoreRepository ptsRepository;
+
     public ResponseEntity<CommonResponse> createPersonalityTestScore(PersonalityTestScore personalityTestScore){
         CommonResponse cr = new CommonResponse();
+        if(!ptsRepository.existsById(personalityTestScore.getId())){
+            ptsRepository.createPersonalityTestScore(personalityTestScore.getScore(),
+                    personalityTestScore.getTestDate(), personalityTestScore.getApplicant().getId());
+
+            cr.msg = "Applicant: " + personalityTestScore.getId() + " was added successfully.";
+            cr.status = HttpStatus.CREATED;
+        }
+        else {
+            cr.msg = "Applicant: " + personalityTestScore.getId() + " already exists";
+            cr.status = HttpStatus.BAD_GATEWAY;
+        }
         return new ResponseEntity<>(cr, cr.status);
     }
 
@@ -36,7 +48,7 @@ public class PersonalityTestScoreService {
 
     public ResponseEntity<CommonResponse> getAllPersonalityTestScores(){
         CommonResponse cr = new CommonResponse();
-        cr.data = ptsRepository.GetAll();
+        cr.data = ptsRepository.GetAllPersonalityTestScores();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all personality test scores.";
 
