@@ -4,7 +4,9 @@ import com.experis.academystatisticsapp.models.Assignment;
 import com.experis.academystatisticsapp.models.Location;
 import com.experis.academystatisticsapp.repositories.AssignmentRepository;
 import com.experis.academystatisticsapp.repositories.LocationRepository;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.Assign;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,17 +22,20 @@ public class AssignmentService {
     @Autowired
     LocationRepository locationRepository;
 
-    public ResponseEntity<CommonResponse> createAssignment(Assignment assignment){
+    public ResponseEntity<CommonResponse> createAssignment(ObjectNode assignment){
         CommonResponse cr = new CommonResponse();
+        Assignment as = new Assignment();
+        as.setName(assignment.get("name").asText());
+        as.setCompanyName(assignment.get("companyName").asText());
 
-        if(!assignmentRepository.existsById(assignment.getId())){
-            Location location = locationRepository.getLocationById(assignment.getLocation().getId());
-            assignmentRepository.createAssignment(assignment.getName(), assignment.getCompanyName(),location.getId());
-            cr.msg = "Assignment " + assignment.getName() + " was added successfully.";
+        if(!assignmentRepository.existsById(as.getId())){
+            Location location = locationRepository.getLocationById(assignment.get("locationId").asLong());
+            assignmentRepository.createAssignment(as.getName(), as.getCompanyName(),location.getId());
+            cr.msg = "Assignment " + as.getName() + " was added successfully.";
             cr.status = HttpStatus.CREATED;
         }
         else {
-            cr.msg = "Assignment: " + assignment.getName() + "at: " + assignment.getCompanyName() + " already exists";
+            cr.msg = "Assignment: " + as.getName() + "at: " + as.getCompanyName() + " already exists";
             cr.status = HttpStatus.BAD_GATEWAY;
         }
         return new ResponseEntity<>(cr, cr.status);

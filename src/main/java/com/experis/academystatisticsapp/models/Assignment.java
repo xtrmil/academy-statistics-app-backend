@@ -20,8 +20,8 @@ public class Assignment {
     @OneToMany(mappedBy = "assignment")
     private List<Applicant> applicants;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id")
+        @OneToOne
+        @JoinColumn(name = "location_id")
     private Location location;
 
 }

@@ -3,6 +3,7 @@ package com.experis.academystatisticsapp.controllers;
 import com.experis.academystatisticsapp.models.Assignment;
 import com.experis.academystatisticsapp.services.AssignmentService;
 import com.experis.academystatisticsapp.services.CommonResponse;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,8 @@ public class AssignmentController {
     AssignmentService assignmentService;
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> addAssignment(@RequestBody Assignment assignment){
+    public ResponseEntity<CommonResponse> addAssignment(@RequestBody ObjectNode assignment){
+
         return assignmentService.createAssignment(assignment);
     }
 
