@@ -56,7 +56,7 @@ public class ApplicantService {
     }
 
     /**TODO*/
-    public ResponseEntity<CommonResponse> updateApplicantById(Long id, Applicant applicantToUpdate){
+    public ResponseEntity<CommonResponse> updateApplicantById(Long id, Applicant updatedApplicant){
         CommonResponse cr = new CommonResponse();
 
         Optional<Applicant> optionalApplicant = Optional.ofNullable(applicantRepository.getApplicantById(id));
@@ -64,16 +64,43 @@ public class ApplicantService {
         if(optionalApplicant.isPresent()){
             Applicant applicant = optionalApplicant.get();
 
-            if(applicantToUpdate.getClsScore() != null){
-                applicant.setClsScore(applicantToUpdate.getClsScore());
+
+            if(updatedApplicant.getInterviewScore() != null){
+                applicant.setInterviewScore(updatedApplicant.getInterviewScore());
             }
-            //applicantRepository.updateApplicantById();
+            if(updatedApplicant.isMovable() != applicant.isMovable()){
+                applicant.setMovable(updatedApplicant.isMovable());
+            }
+            if(updatedApplicant.getClsScore() != null){
+                applicant.setClsScore(updatedApplicant.getClsScore());
+            }
+            if(updatedApplicant.getRelativeClsScore() != null){
+                applicant.setRelativeClsScore(updatedApplicant.getRelativeClsScore());
+            }
+            if(updatedApplicant.getSwitchScore() != null){
+                applicant.setSwitchScore(updatedApplicant.getSwitchScore());
+            }
+            if(updatedApplicant.getRelativeSwitchScore() != null){
+                applicant.setRelativeSwitchScore(updatedApplicant.getRelativeSwitchScore());
+            }
+            if(updatedApplicant.getStudiedSemesters() != null){
+                applicant.setStudiedSemesters(updatedApplicant.getStudiedSemesters());
+            }
+
+            applicantRepository.updateApplicantById(applicant.getClsScore(),
+                    applicant.getInterviewScore(),
+                    applicant.isMovable(),
+                    applicant.getRelativeClsScore(),
+                    applicant.getRelativeSwitchScore(),
+                    applicant.getStudiedSemesters(),
+                    applicant.getSwitchScore());
+
             cr.data = applicant;
             cr.msg = "Applicant: "  + applicant.getId() + " was updated successfully.";
             cr.status = HttpStatus.OK;
         }
         else {
-            cr.msg = "Unable to update applicant: " + applicantToUpdate.getId();
+            cr.msg = "Unable to update applicant: " + updatedApplicant.getId();
             cr.status = HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<>(cr, cr.status);

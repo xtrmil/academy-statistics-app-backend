@@ -49,4 +49,5 @@ public class Applicant {
     @JoinTable(name = "applicant_education", joinColumns = {@JoinColumn(name = "education_id")},
             inverseJoinColumns = {@JoinColumn(name = "applicant_id")})
     private Set<Education> educations;
+
 }
