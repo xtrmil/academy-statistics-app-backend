@@ -34,5 +34,5 @@ public interface EducationRepository extends JpaRepository<Education,Long> {
     void deleteEducationById(Long id);
 
     @Query(value = "SELECT * FROM Education", nativeQuery = true)
-    List<Education> GetAll();
+    List<Education> getAll();
 }

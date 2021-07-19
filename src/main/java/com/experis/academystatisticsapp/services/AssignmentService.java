@@ -112,7 +112,7 @@ public class AssignmentService {
 
     public ResponseEntity<CommonResponse> getAllAssignments(){
         CommonResponse cr = new CommonResponse();
-        cr.data = assignmentRepository.GetAll();
+        cr.data = assignmentRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all users";
 

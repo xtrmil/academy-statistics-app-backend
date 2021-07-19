@@ -91,7 +91,7 @@ public class LocationService {
 
     public ResponseEntity<CommonResponse> getAllLocations(){
         CommonResponse cr = new CommonResponse();
-        cr.data = locationRepository.GetAll();
+        cr.data = locationRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all locations";
 

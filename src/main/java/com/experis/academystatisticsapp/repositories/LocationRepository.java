@@ -34,5 +34,5 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
     void deleteLocationById(Long id);
 
     @Query(value = "SELECT * FROM Location", nativeQuery = true)
-    List<Location> GetAll();
+    List<Location> getAll();
 }

@@ -62,6 +62,6 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
     void deleteApplicantById(Long id);
 
     @Query(value = "SELECT * FROM Applicant", nativeQuery = true)
-    List<Applicant> GetAll();
+    List<Applicant> getAll();
 
 }

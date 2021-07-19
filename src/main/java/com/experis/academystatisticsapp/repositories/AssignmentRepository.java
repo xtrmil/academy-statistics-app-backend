@@ -34,6 +34,6 @@ public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
     void deleteAssignmentById(Long id);
 
     @Query(value = "SELECT * FROM Assignment", nativeQuery = true)
-    List<Assignment> GetAll();
+    List<Assignment> getAll();
 
 }

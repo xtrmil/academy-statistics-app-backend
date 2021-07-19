@@ -34,5 +34,5 @@ public interface DevLanguageRepository extends JpaRepository<DevLanguage, Long> 
     void deleteDevLanguageById(Long id);
 
     @Query(value = "SELECT * FROM dev_language", nativeQuery = true)
-    List<DevLanguage> GetAll();
+    List<DevLanguage> getAll();
 }

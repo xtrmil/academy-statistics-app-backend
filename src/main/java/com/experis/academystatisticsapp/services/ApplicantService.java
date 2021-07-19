@@ -125,7 +125,7 @@ public class ApplicantService {
 
     public ResponseEntity<CommonResponse> getAllApplicants(){
         CommonResponse cr = new CommonResponse();
-        cr.data = applicantRepository.GetAll();
+        cr.data = applicantRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all applicants.";
 

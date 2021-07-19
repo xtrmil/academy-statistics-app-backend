@@ -91,7 +91,7 @@ public class DevLanguageService {
 
     public ResponseEntity<CommonResponse> getAllDevLanguages(){
         CommonResponse cr = new CommonResponse();
-        cr.data = devLanguageRepository.GetAll();
+        cr.data = devLanguageRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all users";
 

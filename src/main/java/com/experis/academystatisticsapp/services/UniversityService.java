@@ -92,7 +92,7 @@ public class UniversityService {
 
     public ResponseEntity<CommonResponse> getAllUniversities(){
         CommonResponse cr = new CommonResponse();
-        cr.data = universityRepository.GetAll();
+        cr.data = universityRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all universities.";
 
