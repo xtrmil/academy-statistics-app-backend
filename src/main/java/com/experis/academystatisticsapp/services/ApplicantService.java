@@ -58,7 +58,6 @@ public class ApplicantService {
     /**TODO*/
     public ResponseEntity<CommonResponse> updateApplicantById(Long id, Applicant updatedApplicant){
         CommonResponse cr = new CommonResponse();
-
         Optional<Applicant> optionalApplicant = Optional.ofNullable(applicantRepository.getApplicantById(id));
 
         if(optionalApplicant.isPresent()){

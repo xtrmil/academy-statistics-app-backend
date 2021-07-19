@@ -1,6 +1,5 @@
 package com.experis.academystatisticsapp.repositories;
 
-import com.experis.academystatisticsapp.models.Applicant;
 import com.experis.academystatisticsapp.models.PersonalityTestScore;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -37,8 +36,9 @@ public interface PersonalityTestScoreRepository extends JpaRepository<Personalit
             "applicant_id) " +
             "VALUES (?1,?2,?3)", nativeQuery = true)
     void updatePersonalityTestScore(Integer score, Date testDate,Long applicantId);
+
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM Personality_test_score WHERE personality_test_score.id = ?1", nativeQuery = true)
-    void deleteApplicantById(Long id);
+    void deleteTestScoreById(Long id);
 }
