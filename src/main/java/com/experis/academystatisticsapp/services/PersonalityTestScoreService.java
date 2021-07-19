@@ -75,7 +75,7 @@ public class PersonalityTestScoreService {
 
     public ResponseEntity<CommonResponse> getAllPersonalityTestScores(){
         CommonResponse cr = new CommonResponse();
-        cr.data = ptsRepository.GetAllPersonalityTestScores();
+        cr.data = ptsRepository.getAllPersonalityTestScores();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all personality test scores.";
 

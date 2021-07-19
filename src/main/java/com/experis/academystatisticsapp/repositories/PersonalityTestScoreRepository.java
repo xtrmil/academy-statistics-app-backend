@@ -14,7 +14,7 @@ import java.util.List;
 public interface PersonalityTestScoreRepository extends JpaRepository<PersonalityTestScore, Long> {
 
     @Query(value = "SELECT * FROM Personality_test_score", nativeQuery = true)
-    List<PersonalityTestScore> GetAllPersonalityTestScores();
+    List<PersonalityTestScore> getAllPersonalityTestScores();
 
     @Query(value = "SELECT * FROM Personality_test_score WHERE personality_test_score.id = ?1", nativeQuery = true)
     PersonalityTestScore getPersonalityTestScoreById(Long id);

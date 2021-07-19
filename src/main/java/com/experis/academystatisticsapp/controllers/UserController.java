@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("all")
     public ResponseEntity<CommonResponse> getAllUsers(){
-        return userService.GetAllUsers();
+        return userService.getAllUsers();
     }
 
     @PutMapping("admin/{userId}")

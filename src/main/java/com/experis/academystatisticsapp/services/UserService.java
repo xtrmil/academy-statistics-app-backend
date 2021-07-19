@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -47,9 +46,9 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    public ResponseEntity<CommonResponse> GetAllUsers(){
+    public ResponseEntity<CommonResponse> getAllUsers(){
         CommonResponse cr = new CommonResponse();
-        cr.data = userRepository.GetAll();
+        cr.data = userRepository.getAll();
         cr.status = HttpStatus.OK;
         cr.msg = "List of all users";
 

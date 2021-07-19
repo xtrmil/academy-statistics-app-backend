@@ -31,7 +31,7 @@ public class UniversityController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<CommonResponse> updateaddUniversity(@PathVariable Long id, @RequestBody University universityToUpdate) {
+    public ResponseEntity<CommonResponse> updateUniversity(@PathVariable Long id, @RequestBody University universityToUpdate) {
         return universityService.updateUniversityById(id, universityToUpdate);
     }
 

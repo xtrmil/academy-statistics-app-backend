@@ -46,6 +46,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void updatePasswordByUserId(Long id, String password);
 
     @Query(value = "SELECT * FROM User", nativeQuery = true)
-    List<User> GetAll();
+    List<User> getAll();
 
 }
