@@ -13,7 +13,7 @@ public class PersonalityTestScore {
     private Long id;
 
     @Column(nullable = false)
-    private int score;
+    private Integer score;
 
     @Column
     private Date testDate;

@@ -15,27 +15,27 @@ public class PersonalityTestScoreController {
     PersonalityTestScoreService ptsService;
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> addAssignment(@RequestBody PersonalityTestScore personalityTestScore){
+    public ResponseEntity<CommonResponse> createPersonalityTestScore(@RequestBody PersonalityTestScore personalityTestScore){
         return ptsService.createPersonalityTestScore(personalityTestScore);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CommonResponse> getAssignment(@PathVariable Long id) {
+    public ResponseEntity<CommonResponse> getPersonalityTestScoreById(@PathVariable Long id) {
         return ptsService.getPersonalityTestScoreById(id);
     }
 
     @GetMapping("all")
-    public ResponseEntity<CommonResponse> getAllAssignments(){
+    public ResponseEntity<CommonResponse> getAllPersonalityTestScores(){
         return ptsService.getAllPersonalityTestScores();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<CommonResponse> updateAssignment(@PathVariable Long id, @RequestBody PersonalityTestScore ptsToUpdate) {
+    public ResponseEntity<CommonResponse> updatePersonalityTestScore(@PathVariable Long id, @RequestBody PersonalityTestScore ptsToUpdate) {
         return ptsService.updatePersonalityTestScoreById(id, ptsToUpdate);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<CommonResponse> deleteAssignment(@PathVariable Long id){
+    public ResponseEntity<CommonResponse> deletePersonalityTestScore(@PathVariable Long id){
         return ptsService.deletePersonalityTestScoreById(id);
     }
 }

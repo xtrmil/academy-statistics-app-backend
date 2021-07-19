@@ -16,27 +16,27 @@ public class UniversityController {
 
 
     @PostMapping("")
-    public ResponseEntity<CommonResponse> addLocation(@RequestBody University university){
+    public ResponseEntity<CommonResponse> addUniversity(@RequestBody University university){
         return universityService.createUniversity(university);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CommonResponse> getLocation(@PathVariable Long id) {
+    public ResponseEntity<CommonResponse> getUniversityById(@PathVariable Long id) {
         return universityService.getUniversityById(id);
     }
 
     @GetMapping("all")
-    public ResponseEntity<CommonResponse> getAllLocations(){
+    public ResponseEntity<CommonResponse> getAllUniversities(){
         return universityService.getAllUniversities();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<CommonResponse> updateLocation(@PathVariable Long id, @RequestBody University universityToUpdate) {
+    public ResponseEntity<CommonResponse> updateaddUniversity(@PathVariable Long id, @RequestBody University universityToUpdate) {
         return universityService.updateUniversityById(id, universityToUpdate);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<CommonResponse> deleteLocation(@PathVariable Long id){
+    public ResponseEntity<CommonResponse> deleteaddUniversity(@PathVariable Long id){
         return universityService.deleteUniversityById(id);
     }
 
