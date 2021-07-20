@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -45,7 +43,6 @@ public class UserService {
 
     public ResponseEntity<CommonResponse> getUser(Long id) {
         CommonResponse cr = new CommonResponse();
-
         Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
 
         if (optionalUser.isPresent()) {
@@ -70,7 +67,6 @@ public class UserService {
 
     public ResponseEntity<CommonResponse> updateUserIsAdmin(Long id) {
         CommonResponse cr = new CommonResponse();
-
         Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
 
         if (optionalUser.isPresent()) {
@@ -87,7 +83,6 @@ public class UserService {
 
     public ResponseEntity<CommonResponse> updateUserPassword(Long id, String password) {
         CommonResponse cr = new CommonResponse();
-
         Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
 
         if (optionalUser.isPresent()) {
@@ -104,31 +99,30 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    public ResponseEntity<CommonResponse> updateUser(Long id, User userToUpdate) {
+    public ResponseEntity<CommonResponse> updateUser(Long id, User updatedUser) {
         CommonResponse cr = new CommonResponse();
-
         Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
 
-            if (userToUpdate.getFirstName() != null) {
-                user.setFirstName(userToUpdate.getFirstName());
+            if (updatedUser.getFirstName() != null) {
+                user.setFirstName(firstLetterToUpperCase(updatedUser.getFirstName()));
             }
 
-            if (userToUpdate.getLastName() != null) {
-                user.setLastName(userToUpdate.getLastName());
+            if (updatedUser.getLastName() != null) {
+                user.setLastName(firstLetterToUpperCase(updatedUser.getLastName()));
             }
 
-            if (userToUpdate.getEmail() != null) {
-                user.setEmail(userToUpdate.getEmail());
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail().toLowerCase());
             }
             userRepository.updateUserById(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName());
             cr.data = user;
             cr.msg = "User: " + user.getFirstName() + " " + user.getLastName() + " was updated.";
             cr.status = HttpStatus.OK;
         } else {
-            cr.msg = "Unable to update user with email : " + userToUpdate.getEmail();
+            cr.msg = "Unable to update user with email : " + updatedUser.getEmail();
             cr.status = HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<>(cr, cr.status);
@@ -136,7 +130,6 @@ public class UserService {
 
     public ResponseEntity<CommonResponse> deleteUser(Long id) {
         CommonResponse cr = new CommonResponse();
-
         Optional<User> optionalUser = Optional.ofNullable(userRepository.getUserById(id));
 
         if (optionalUser.isPresent()) {
@@ -152,7 +145,7 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    public boolean validateUserInput(User user){
+    private boolean validateUserInput(User user){
         if(user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null){
             return false;
         }else{
@@ -160,11 +153,10 @@ public class UserService {
         }
     }
 
-    public void createAndFormatUser(User user){
-        User formatedUser = user;
-        formatedUser.setEmail(user.getEmail().toLowerCase());
-        formatedUser.setFirstName(firstLetterToUpperCase(user.getFirstName()));
-        formatedUser.setLastName(firstLetterToUpperCase(user.getLastName()));
+    private void createAndFormatUser(User user){
+        user.setEmail(user.getEmail().toLowerCase());
+        user.setFirstName(firstLetterToUpperCase(user.getFirstName()));
+        user.setLastName(firstLetterToUpperCase(user.getLastName()));
         userRepository.createUser(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword(), (byte) (user.getIsAdmin() ? 1 : 0));
     }
 
