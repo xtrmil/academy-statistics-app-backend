@@ -29,7 +29,7 @@ public class UserService {
                     cr.msg = "User with email: " + user.getEmail() + " was created successfully.";
                     cr.status = HttpStatus.CREATED;
                 } else {
-                    cr.msg = "Email must ba a valid experis mail: name@se.experis.com";
+                    cr.msg = "Email must ba a valid Experis mail: name@se.experis.com";
                     cr.status = HttpStatus.FORBIDDEN;
                 }
             }
