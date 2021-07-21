@@ -15,13 +15,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     private String experisEmail = "se.experis.com";
-    private Utils utils;
+    private Utils utils = new Utils();
 
     public ResponseEntity<CommonResponse> addUser(User user) {
         CommonResponse cr = new CommonResponse();
 
         if (!userRepository.existsByEmail(user.getEmail())) {
-            if (!validateUserInput(user)) {
+            if (validateUserInput(user)) {
                 cr.msg = "all fields need to be filled";
                 cr.status = HttpStatus.NOT_ACCEPTABLE;
             } else {
@@ -147,13 +147,7 @@ public class UserService {
         return new ResponseEntity<>(cr, cr.status);
     }
 
-    private boolean validateUserInput(User user){
-        if(user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null){
-            return false;
-        }else{
-            return true;
-        }
-    }
+    private boolean validateUserInput(User user){ return (user.getFirstName() == null || user.getLastName() == null || user.getEmail() == null || user.getPassword() == null); }
 
     private void createAndFormatUser(User user){
         user.setEmail(user.getEmail().toLowerCase());
@@ -161,6 +155,4 @@ public class UserService {
         user.setLastName(utils.firstLetterToUpperCase(user.getLastName()));
         userRepository.createUser(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword(), (byte) (user.getIsAdmin() ? 1 : 0));
     }
-
-
 }

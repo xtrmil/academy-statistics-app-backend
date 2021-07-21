@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class ApplicantService {
-    private Utils utils;
+    private Utils utils = new Utils();
 
     @Autowired
     ApplicantRepository applicantRepository;
