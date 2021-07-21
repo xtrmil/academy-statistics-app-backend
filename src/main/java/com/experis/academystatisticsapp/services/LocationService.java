@@ -18,7 +18,7 @@ public class LocationService {
     public ResponseEntity<CommonResponse> createLocation(Location location){
         CommonResponse cr = new CommonResponse();
 
-        if(!locationRepository.existsById(location.getId())){
+        if(!locationRepository.existsByName(location.getName())){
             locationRepository.createLocation(location.getName());
             cr.msg = "Location: " + location.getName() + " was added successfully.";
             cr.status = HttpStatus.CREATED;

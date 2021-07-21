@@ -23,6 +23,9 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
     @Query(value = "SELECT IF(EXISTS (SELECT * FROM Location WHERE location.id =?1), 'true','false')", nativeQuery = true)
     boolean existsById(Long id);
 
+    @Query(value = "SELECT IF(EXISTS(SELECT * FROM Location WHERE location.name = ?1), 'true','false')", nativeQuery = true)
+    boolean existsByName(String name);
+
     @Transactional
     @Modifying
     @Query(value = "UPDATE Location SET name = ?2 WHERE location.id = ?1", nativeQuery = true)

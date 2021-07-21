@@ -14,15 +14,19 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO Applicant " +
-            "(cls_score, " +
+            "(first_name" +
+            "last_name" +
+            "cls_score, " +
             "interview_score, " +
             "movable, " +
             "relative_cls_score, " +
             "relative_switch_score, " +
             "studied_semesters, " +
             "switch_score) " +
-            "VALUES (?1,?2,?3,?4,?5,?6,?7)", nativeQuery = true)
-    void createApplicant(Integer clsScore,
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)
+    void createApplicant(String firstName,
+                         String lastName,
+                         Integer clsScore,
                          Integer interviewScore,
                          boolean movable,
                          Integer relativeClsScore,
@@ -40,21 +44,25 @@ public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
     @Transactional
     @Modifying
     @Query(value = "REPLACE INTO Applicant " +
-            "(cls_score, " +
+            "(first_name" +
+            "last_name" +
+            "cls_score, " +
             "interview_score, " +
             "movable, " +
             "relative_cls_score, " +
             "relative_switch_score, " +
             "studied_semesters, " +
             "switch_score) " +
-            "VALUES (?1,?2,?3,?4,?5,?6,?7)", nativeQuery = true)
-    void updateApplicantById(Integer clsScore,
-                         Integer interviewScore,
-                         boolean movable,
-                         Integer relativeClsScore,
-                         Integer relativeSwitchScore,
-                         Integer studiedSemester,
-                         Integer switchScore);
+            "VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)
+    void updateApplicantById(String firstName,
+                             String lastName,
+                             Integer clsScore,
+                             Integer interviewScore,
+                             boolean movable,
+                             Integer relativeClsScore,
+                             Integer relativeSwitchScore,
+                             Integer studiedSemester,
+                             Integer switchScore);
 
     @Transactional
     @Modifying
