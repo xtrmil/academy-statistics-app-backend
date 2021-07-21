@@ -2,6 +2,7 @@ package com.experis.academystatisticsapp.services;
 
 import com.experis.academystatisticsapp.models.Applicant;
 import com.experis.academystatisticsapp.repositories.ApplicantRepository;
+import com.experis.academystatisticsapp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class ApplicantService {
+    private Utils utils;
 
     @Autowired
     ApplicantRepository applicantRepository;
@@ -19,7 +21,9 @@ public class ApplicantService {
         CommonResponse cr = new CommonResponse();
 
         if(!applicantRepository.existsById(applicant.getId())){
-            applicantRepository.createApplicant(applicant.getClsScore(),
+            applicantRepository.createApplicant(utils.firstLetterToUpperCase(applicant.getFirstName()),
+                    utils.firstLetterToUpperCase(applicant.getLastName()),
+                    applicant.getClsScore(),
                     applicant.getInterviewScore(),
                     applicant.isMovable(),
                     applicant.getRelativeClsScore(),
@@ -62,7 +66,12 @@ public class ApplicantService {
         if(optionalApplicant.isPresent()){
             Applicant applicant = optionalApplicant.get();
 
-
+            if(updatedApplicant.getFirstName() != null){
+                applicant.setFirstName(utils.firstLetterToUpperCase(updatedApplicant.getFirstName()));
+            }
+            if(updatedApplicant.getLastName() != null){
+                applicant.setLastName(utils.firstLetterToUpperCase(updatedApplicant.getLastName()));
+            }
             if(updatedApplicant.getInterviewScore() != null){
                 applicant.setInterviewScore(updatedApplicant.getInterviewScore());
             }
@@ -85,7 +94,9 @@ public class ApplicantService {
                 applicant.setStudiedSemesters(updatedApplicant.getStudiedSemesters());
             }
 
-            applicantRepository.updateApplicantById(applicant.getClsScore(),
+            applicantRepository.updateApplicantById(applicant.getFirstName(),
+                    applicant.getLastName(),
+                    applicant.getClsScore(),
                     applicant.getInterviewScore(),
                     applicant.isMovable(),
                     applicant.getRelativeClsScore(),

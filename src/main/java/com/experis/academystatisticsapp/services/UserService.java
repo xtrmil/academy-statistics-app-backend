@@ -2,6 +2,7 @@ package com.experis.academystatisticsapp.services;
 
 import com.experis.academystatisticsapp.models.User;
 import com.experis.academystatisticsapp.repositories.UserRepository;
+import com.experis.academystatisticsapp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     private String experisEmail = "se.experis.com";
+    private Utils utils;
 
     public ResponseEntity<CommonResponse> addUser(User user) {
         CommonResponse cr = new CommonResponse();
@@ -107,11 +109,11 @@ public class UserService {
             User user = optionalUser.get();
 
             if (updatedUser.getFirstName() != null) {
-                user.setFirstName(firstLetterToUpperCase(updatedUser.getFirstName()));
+                user.setFirstName(utils.firstLetterToUpperCase(updatedUser.getFirstName()));
             }
 
             if (updatedUser.getLastName() != null) {
-                user.setLastName(firstLetterToUpperCase(updatedUser.getLastName()));
+                user.setLastName(utils.firstLetterToUpperCase(updatedUser.getLastName()));
             }
 
             if (updatedUser.getEmail() != null) {
@@ -155,12 +157,10 @@ public class UserService {
 
     private void createAndFormatUser(User user){
         user.setEmail(user.getEmail().toLowerCase());
-        user.setFirstName(firstLetterToUpperCase(user.getFirstName()));
-        user.setLastName(firstLetterToUpperCase(user.getLastName()));
+        user.setFirstName(utils.firstLetterToUpperCase(user.getFirstName()));
+        user.setLastName(utils.firstLetterToUpperCase(user.getLastName()));
         userRepository.createUser(user.getEmail(), user.getFirstName(), user.getLastName(), user.getPassword(), (byte) (user.getIsAdmin() ? 1 : 0));
     }
 
-    private String firstLetterToUpperCase(String str){
-        return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
-    }
+
 }
