@@ -2,9 +2,12 @@ package com.experis.academystatisticsapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class UserCredentials implements UserDetails {
 
@@ -19,6 +22,7 @@ public class UserCredentials implements UserDetails {
     private String secret;
     private boolean isVerified;
     private boolean isAdmin;
+    private List<GrantedAuthority> authorities;
 
     public UserCredentials(User user){
         this.id = user.getId();
@@ -29,6 +33,11 @@ public class UserCredentials implements UserDetails {
         this.isAdmin = user.getIsAdmin();
         this.secret = user.getSecret();
         this.isVerified = user.getIsVerified();
+        if(user.getIsAdmin()){
+            this.authorities = Collections.singletonList( new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else{
+            this.authorities =  Collections.singletonList( new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     public Long getId() {
@@ -36,9 +45,7 @@ public class UserCredentials implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    public Collection<? extends GrantedAuthority> getAuthorities() { return authorities; }
 
     @Override
     @JsonIgnore
