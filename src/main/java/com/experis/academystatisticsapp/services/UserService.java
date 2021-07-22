@@ -8,25 +8,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    private String experisEmail = "se.experis.com";
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    private final String EXPERISEMAIL = "se.experis.com";
     private Utils utils = new Utils();
 
     public ResponseEntity<CommonResponse> addUser(User user) {
         CommonResponse cr = new CommonResponse();
 
         if (!userRepository.existsByEmail(user.getEmail())) {
+            String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+            user.setPassword(encodedPassword);
             if (validateUserInput(user)) {
                 cr.msg = "all fields need to be filled";
                 cr.status = HttpStatus.NOT_ACCEPTABLE;
             } else {
                 String[] result = user.getEmail().split("@");
-                if (result[1].equals(experisEmail)) {
+                if (result[1].equals(EXPERISEMAIL)) {
                     createAndFormatUser(user);
                     cr.msg = "User with email: " + user.getEmail() + " was created successfully.";
                     cr.status = HttpStatus.CREATED;
