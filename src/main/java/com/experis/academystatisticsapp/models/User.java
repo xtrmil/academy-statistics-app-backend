@@ -1,6 +1,7 @@
 package com.experis.academystatisticsapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data; // Lombok, tool for auto generation of getters and setters by using @Data in model class
 import javax.persistence.*;
@@ -27,4 +28,12 @@ public class User {
 
     @Column(nullable = false)
     private Boolean isAdmin = false;
+
+    @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    String secret;
+
+    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean isVerified = false;
 }
