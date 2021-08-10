@@ -21,6 +21,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM User user WHERE user.id = ?1", nativeQuery = true)
     User getUserById(Long id);
 
+    @Query(value = "SELECT * FROM User user WHERE user.email = ?1", nativeQuery = true)
+    User getUserByEmail(String email);
+
     @Query(value = "SELECT IF(EXISTS (SELECT * FROM User WHERE User.email =?1), 'true','false')", nativeQuery = true)
     boolean existsByEmail(String email);
 
