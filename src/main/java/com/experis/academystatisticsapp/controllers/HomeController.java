@@ -1,15 +1,26 @@
 package com.experis.academystatisticsapp.controllers;
 
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HomeController {
 
-    @GetMapping( "home" )
-    public String home( @AuthenticationPrincipal(expression = "claims['name']") String name ) {
-        return String.format( "Hello %s!  welcome to the Security app", name);
+    @PreAuthorize("hasRole('ROLE_Users')")
+    @RequestMapping("/")
+    public String helloWorld() {
+        return "Hello Users!";
+    }
+    @PreAuthorize("hasRole('ROLE_Test')")
+    @RequestMapping("/Test")
+    public String groupOne() {
+        return "Hello Group 1 Users!";
+    }
+    @PreAuthorize("hasRole('ROLE_group2')")
+    @RequestMapping("/Group2")
+    public String groupTwo() {
+        return "Hello Group 2 Users!";
     }
 }
