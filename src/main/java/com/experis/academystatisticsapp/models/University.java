@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Data
 @Entity
-public class Education {
+public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,12 +14,6 @@ public class Education {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "educations")
+    @ManyToMany(mappedBy = "universities")
     private Set<Location> locations;
-
-    @ManyToMany(mappedBy = "educations")
-    private Set<Applicant> applicants;
-
-
-
 }

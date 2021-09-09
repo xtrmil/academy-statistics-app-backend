@@ -2,24 +2,23 @@ package com.experis.academystatisticsapp.models;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Date;
 
 @Data
 @Entity
-public class Education {
+public class PersonalityTestScore {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private Integer score;
 
-    @ManyToMany(mappedBy = "educations")
-    private Set<Location> locations;
+    @Column
+    private Date testDate;
 
-    @ManyToMany(mappedBy = "educations")
-    private Set<Applicant> applicants;
-
-
-
+    @ManyToOne
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
 }
