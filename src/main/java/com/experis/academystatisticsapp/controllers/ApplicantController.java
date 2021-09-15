@@ -5,6 +5,7 @@ import com.experis.academystatisticsapp.services.ApplicantService;
 import com.experis.academystatisticsapp.services.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,7 @@ public class ApplicantController {
     public ResponseEntity<CommonResponse> getApplicantById(@PathVariable Long id) {
         return applicantService.getApplicantById(id);
     }
-
+    @PreAuthorize("hasRole('ROLE_Liffa')")
     @GetMapping("all")
     public ResponseEntity<CommonResponse> getAllApplicants(){
         return applicantService.getAllApplicants();

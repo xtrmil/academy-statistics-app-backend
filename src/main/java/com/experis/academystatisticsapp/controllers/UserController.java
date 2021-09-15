@@ -6,6 +6,7 @@ import com.experis.academystatisticsapp.services.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasRole('ROLE_Admin')")
     @PostMapping("")
     public ResponseEntity<CommonResponse> createUser(@RequestBody User user) {
         return userService.addUser(user);
@@ -30,6 +32,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @PreAuthorize("hasRole('ROLE_Admin')")
     @PutMapping("admin/{userId}")
     public ResponseEntity<CommonResponse> updateUserIsAdmin(@PathVariable Long userId) {
         return userService.updateUserIsAdmin(userId);

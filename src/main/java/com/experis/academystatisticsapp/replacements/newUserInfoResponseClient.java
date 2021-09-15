@@ -49,7 +49,7 @@ import java.nio.charset.Charset;
  * @author Joe Grandja (modifications by Stewart Adam to fix Accept header)
  * @since 5.0
  */
-final class KickstartUserInfoResponseClient {
+final class newUserInfoResponseClient {
     private static final String INVALID_USER_INFO_RESPONSE_ERROR_CODE = "invalid_user_info_response";
     private final GenericHttpMessageConverter genericHttpMessageConverter = new MappingJackson2HttpMessageConverter();
 

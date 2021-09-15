@@ -48,10 +48,10 @@ import java.util.Set;
  * @see OAuth2User
  * @see DefaultOAuth2User
  */
-public class KickstartOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class newOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
     private static final String MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE = "missing_user_name_attribute";
-    private KickstartUserInfoResponseClient userInfoResponseClient = new KickstartUserInfoResponseClient();
+    private newUserInfoResponseClient userInfoResponseClient = new newUserInfoResponseClient();
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class HomeController {
@@ -38,9 +39,17 @@ public class HomeController {
         String redirect = String.format("https://login.microsoftonline.com/common/oauth2/authorize?client_id=%s&state=%s&resource=%s&redirect_uri=%s&response_type=code&response_mode=post", client_id, state, resource, redirect_uri);
         return new ModelAndView("redirect:" + redirect, model);
     }
-    @PreAuthorize("hasRole('ROLE_Test')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping("/")
-    public String groupOne() {
-        return "Hello Test Users!";
+    public String groupOne(HttpServletRequest request) {
+        if(request.isUserInRole("ROLE_ADMIN")){
+            return "Hello Admins!";
+        }else{
+            return "Hello nonAdmins";
+        }
+
+
     }
+
+
 }
